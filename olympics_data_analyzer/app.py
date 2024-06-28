@@ -13,7 +13,7 @@ df = preprocessor.preprocess(df,region_df)
 st.sidebar.title("Summer Olympics Analysis")
 user_menu = st.sidebar.radio(
     'select an Option',
-    ('Medal Tally' , 'Overall Analysis' , 'Country wise Analysis' , 'Athelete-wise Analysis')
+    ('Medal Tally' , 'Overall Analysis' , 'Country wise Analysis' , 'Athelete wise Analysis')
 )
 # st.dataframe(df)
 
@@ -135,4 +135,10 @@ if user_menu == 'Country wise Analysis':
     st.title("Top 10 athletes of " + selected_country)
     top_10_df = helper.most_successful_countrywise(df,selected_country)
     st.table(top_10_df)
+
+
+if user_menu == 'Athelete wise Analysis':
+
+    st.title('Athlete wise analysis')
+
 
