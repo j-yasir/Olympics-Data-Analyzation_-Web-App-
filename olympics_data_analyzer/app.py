@@ -4,6 +4,8 @@ import  preprocessor,helper
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.figure_factory as ff
+
 
 df = pd.read_csv('athlete_events.csv')
 region_df = pd.read_csv('noc_regions.csv')
@@ -141,4 +143,13 @@ if user_menu == 'Athelete wise Analysis':
 
     st.title('Athlete wise analysis')
 
+    athlete_df = df.drop_duplicates(subset=['Name', 'region'])
 
+    x1 = athlete_df['Age'].dropna()
+    x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
+    x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
+    x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
+
+    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall age', 'Gold Medalist', 'Silver Medalist', 'Bronze Medalist'],
+                             show_hist=False, show_rug=False)
+    st.plotly_chart(fig)
